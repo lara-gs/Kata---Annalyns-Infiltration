@@ -1,67 +1,69 @@
 # Annalyn's Infiltration
 
-## Description
+## Descripción
 
-In this exercise, you'll be implementing the quest logic for a new RPG game a friend is developing. The game's main character is Annalyn, a brave girl with a fierce and loyal pet dog. Unfortunately, disaster strikes, as her best friend was kidnapped while searching for berries in the forest. Annalyn will try to find and free her best friend, optionally taking her dog with her on this quest.
+En este ejercicio, implementarás la lógica de la misión para un nuevo juego de rol que un amigo está desarrollando. El personaje principal del juego es **Annalyn**, una valiente niña con un perro leal. Desafortunadamente, ocurre un desastre, ya que su mejor amiga fue secuestrada mientras buscaba bayas en el bosque. Annalyn intentará encontrar y liberar a su mejor amiga, opcionalmente llevando a su perro con ella en esta misión.
 
-After some time spent following her best friend's trail, she finds the camp in which her best friend is imprisoned. It turns out there are two kidnappers: a mighty knight and a cunning archer.
+Después de seguir el rastro de su mejor amiga, encuentra el campamento en el que está prisionera. Resulta que hay dos secuestradores: un **caballero poderoso** y un **arquero astuto**.
 
-Having found the kidnappers, Annalyn considers which of the following actions she can engage in:
+Habiendo encontrado a los secuestradores, Annalyn considera cuáles de las siguientes acciones puede realizar:
 
-Fast attack: a fast attack can be made if the knight is sleeping, as it takes time for him to get his armor on, so he will be vulnerable.
+- **Ataque rápido**: un ataque rápido puede hacerse si el caballero está durmiendo, ya que le toma tiempo ponerse su armadura, por lo que será vulnerable.
 
-Spy: the group can be spied upon if at least one of them is awake. Otherwise, spying is a waste of time.
+- **Espiar**: el grupo puede ser espiado si al menos uno de ellos está despierto. De lo contrario, espiar es una pérdida de tiempo.
 
-Signal prisoner: the prisoner can be signalled using bird sounds if the prisoner is awake and the archer is sleeping, as archers are trained in bird signaling, so they could intercept the message.
+- **Señalizar al prisionero**: el prisionero puede ser señalizado utilizando sonidos de pájaros si el prisionero está despierto y el arquero está durmiendo, ya que los arqueros están entrenados en la señalización de aves, por lo que podrían interceptar el mensaje.
 
-Free prisoner: Annalyn can try sneaking into the camp to free the prisoner. This is a risky thing to do and can only succeed in one of two ways:
+- **Liberar al prisionero**: Annalyn puede intentar infiltrarse en el campamento para liberar al prisionero. Esto es arriesgado y solo puede tener éxito de dos maneras:
+    - Si Annalyn tiene a su perro con ella, puede rescatar al prisionero si el arquero está dormido. El caballero le teme al perro y el arquero no tendrá tiempo para prepararse antes de que Annalyn y el prisionero puedan escapar.
+    - Si Annalyn no tiene a su perro, entonces ella y el prisionero deben ser muy sigilosos. Annalyn puede liberar al prisionero si este está despierto y tanto el caballero como el arquero están dormidos, pero si el prisionero está durmiendo no podrá ser rescatado: el prisionero se asustaría por la repentina aparición de Annalyn y despertaría al caballero y al arquero.
 
-    If Annalyn has her pet dog with her she can rescue the prisoner if the archer is asleep. The knight is scared of the dog and the archer will not have time to get ready before Annalyn and the prisoner can escape.
-    
-    If Annalyn does not have her dog then she and the prisoner must be very sneaky! Annalyn can free the prisoner if the prisoner is awake and the knight and archer are both sleeping, but if the prisoner is sleeping they can't be rescued: the prisoner would be startled by Annalyn's sudden appearance and wake up the knight and archer.
+## Tareas
 
-You have four tasks: to implement the logic for determining if the above actions are available based on the state of the three characters found in the forest and whether Annalyn's pet dog is present or not.
+Tienes cuatro tareas: implementar la lógica para determinar si las acciones anteriores están disponibles según el estado de los tres personajes encontrados en el bosque y si el perro de Annalyn está presente o no.
 
-## 1. Check if a fast attack can be made
-Implement the (static) AnnalynsInfiltration.canFastAttack() method that takes a boolean value that indicates if the knight is awake. This method returns true if a fast attack can be made based on the state of the knight. Otherwise, returns false:
+1. **Verificar si se puede realizar un ataque rápido**  
+Implementa el método estático `AnnalynsInfiltration.canFastAttack()` que toma un valor booleano que indica si el caballero está despierto. Este método devuelve `true` si se puede realizar un ataque rápido basado en el estado del caballero. De lo contrario, devuelve `false`:
 
-```
-boolean knightIsAwake = true;
-AnnalynsInfiltration.canFastAttack(knightIsAwake);
-// => false
-```
-## 2. Check if the group can be spied upon
-Implement the (static) AnnalynsInfiltration.canSpy() method that takes three boolean values, indicating if the knight, archer and the prisoner, respectively, are awake. The method returns true if the group can be spied upon, based on the state of the three characters. Otherwise, returns false:
+    ```java
+    boolean knightIsAwake = true;
+    AnnalynsInfiltration.canFastAttack(knightIsAwake);
+    // => false
+    ```
 
-```
-boolean knightIsAwake = false;
-boolean archerIsAwake = true;
-boolean prisonerIsAwake = false;
-AnnalynsInfiltration.canSpy(knightIsAwake, archerIsAwake, prisonerIsAwake);
-// => true
-```
+2. **Verificar si el grupo puede ser espiado**  
+Implementa el método estático `AnnalynsInfiltration.canSpy()` que toma tres valores booleanos, indicando si el caballero, el arquero y el prisionero, respectivamente, están despiertos. El método devuelve `true` si el grupo puede ser espiado, basado en el estado de los tres personajes. De lo contrario, devuelve `false`:
 
-## 3. Check if the prisoner can be signalled
-Implement the (static) AnnalynsInfiltration.canSignalPrisoner() method that takes two boolean values, indicating if the archer and the prisoner, respectively, are awake. The method returns true if the prisoner can be signalled, based on the state of the two characters. Otherwise, returns false
+    ```java
+    boolean knightIsAwake = false;
+    boolean archerIsAwake = true;
+    boolean prisonerIsAwake = false;
+    AnnalynsInfiltration.canSpy(knightIsAwake, archerIsAwake, prisonerIsAwake);
+    // => true
+    ```
 
-```
-boolean archerIsAwake = false;
-boolean prisonerIsAwake = true;
-AnnalynsInfiltration.canSignalPrisoner(archerIsAwake, prisonerIsAwake);
-// => true
-```
+3. **Verificar si se puede señalizar al prisionero**  
+Implementa el método estático `AnnalynsInfiltration.canSignalPrisoner()` que toma dos valores booleanos, indicando si el arquero y el prisionero, respectivamente, están despiertos. El método devuelve `true` si el prisionero puede ser señalizado, basado en el estado de los dos personajes. De lo contrario, devuelve `false`:
 
-## 4. Check if the prisoner can be freed
-Implement the (static) AnnalynsInfiltration.canFreePrisoner() method that takes four boolean values. The first three parameters indicate if the knight, archer and the prisoner, respectively, are awake. The last parameter indicates if Annalyn's pet dog is present. The method returns true if the prisoner can be freed based on the state of the three characters and Annalyn's pet dog's presence. Otherwise, it returns false:
+    ```java
+    boolean archerIsAwake = false;
+    boolean prisonerIsAwake = true;
+    AnnalynsInfiltration.canSignalPrisoner(archerIsAwake, prisonerIsAwake);
+    // => true
+    ```
 
-```
-boolean knightIsAwake = false;
-boolean archerIsAwake = true;
-boolean prisonerIsAwake = false;
-boolean petDogIsPresent = false;
-AnnalynsInfiltration.canFreePrisoner(knightIsAwake, archerIsAwake, prisonerIsAwake, petDogIsPresent);
-// => false
-```
+4. **Verificar si se puede liberar al prisionero**  
+Implementa el método estático `AnnalynsInfiltration.canFreePrisoner()` que toma cuatro valores booleanos. Los primeros tres parámetros indican si el caballero, el arquero y el prisionero, respectivamente, están despiertos. El último parámetro indica si el perro de Annalyn está presente. El método devuelve `true` si el prisionero puede ser liberado basado en el estado de los tres personajes y la presencia del perro de Annalyn. De lo contrario, devuelve `false`:
 
-### Source
-- https://exercism.org/tracks/java/exercises/annalyns-infiltration
+    ```java
+    boolean knightIsAwake = false;
+    boolean archerIsAwake = true;
+    boolean prisonerIsAwake = false;
+    boolean petDogIsPresent = false;
+    AnnalynsInfiltration.canFreePrisoner(knightIsAwake, archerIsAwake, prisonerIsAwake, petDogIsPresent);
+    // => false
+    ```
+
+## Fuente
+
+[Annalyn's Infiltration - Exercism](https://exercism.org/tracks/java/exercises/annalyns-infiltration)
