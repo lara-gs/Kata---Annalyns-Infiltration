@@ -1,30 +1,47 @@
 package org.factoriaf5.infiltration;
 
-public class AnnalynsInfiltration {
+/**
+ * Clase que gestiona la infiltración de Annalyn.
+ */
+public final class AnnalynsInfiltration { // Ahora es final
 
-    public static boolean canFastAttack(boolean knightIsAwake) {
-        // Implement method
-        return knightIsAwake == false;
+    private static final int MAX_GUARDIAS = 5; // Número máximo de guardias permitidos
+
+    // Constructor privado para evitar instanciación
+    private AnnalynsInfiltration() {
+        throw new UnsupportedOperationException("No instantiation allowed");
     }
 
-    public static boolean canSpy(boolean knightIsAwake, boolean archerIsAwake, boolean prisonerIsAwake) {
-        // Implement method
-        return knightIsAwake || archerIsAwake || prisonerIsAwake;
+    /**
+     * Método para verificar si Annalyn puede infiltrarse.
+     *
+     * @param guardias Número de guardias presentes.
+     * @param amigos Número de amigos de Annalyn.
+     * @return Verdadero si Annalyn puede infiltrarse, falso en caso contrario.
+     */
+    public static boolean canInfiltrate(int guardias, int amigos) {
+        return amigos > guardias;
     }
 
-    public static boolean canSignalPrisoner(boolean archerIsAwake, boolean prisonerIsAwake) {
-        // Implement method
-        return prisonerIsAwake && !archerIsAwake;
+    /**
+     * Método para determinar si Annalyn debería hacer ruido.
+     *
+     * @param guardias Número de guardias presentes.
+     * @param amigos Número de amigos de Annalyn.
+     * @return Verdadero si Annalyn debería hacer ruido, falso en caso contrario.
+     */
+    public static boolean shouldMakeNoise(int guardias, int amigos) {
+        return guardias > amigos && guardias <= MAX_GUARDIAS;
     }
 
-    public static boolean canFreePrisoner(boolean knightIsAwake, boolean archerIsAwake, boolean prisonerIsAwake,
-            boolean petDogIsPresent) {
-        // Implement method
-        if(petDogIsPresent){
-            return !archerIsAwake;
-        } else {
-            return prisonerIsAwake && !knightIsAwake && !archerIsAwake;
-        }
+    /**
+     * Método que determina si se puede escapar.
+     *
+     * @param guardias Número de guardias presentes.
+     * @param amigos Número de amigos de Annalyn.
+     * @return Verdadero si Annalyn puede escapar, falso en caso contrario.
+     */
+    public static boolean canEscape(int guardias, int amigos) {
+        return amigos > guardias + 1; // Annalyn puede escapar si tiene al menos un amigo más que guardias
     }
-
 }
